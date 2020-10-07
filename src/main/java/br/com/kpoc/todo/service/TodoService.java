@@ -2,7 +2,6 @@ package br.com.kpoc.todo.service;
 
 import br.com.kpoc.todo.model.Todo;
 import br.com.kpoc.todo.repository.TodoRepository;
-import java.util.ArrayList;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -48,10 +47,8 @@ public class TodoService {
         this.todoRepository.delete(foundTodo.get());
     }
 
-    public ArrayList<Todo> getAll() {
-        ArrayList<Todo> todoList = new ArrayList<>();
-        todoRepository.findAll().forEach(todoList::add);
-        return todoList;
+    public Iterable<Todo> getAll() {
+        return todoRepository.findAll();
     }
 
     public Todo getById(UUID id){
