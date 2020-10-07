@@ -1,5 +1,7 @@
 package br.com.kpoc.todo.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
