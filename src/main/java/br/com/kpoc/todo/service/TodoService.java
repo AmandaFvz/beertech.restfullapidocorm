@@ -17,14 +17,14 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public void createTodo(Todo todo){
+    public Todo createTodo(Todo todo){
         Optional<Todo> foundTodo = this.todoRepository.findByTitle(todo.getTitle());
 
         if(foundTodo.isPresent()){
             throw new HttpClientErrorException(HttpStatus.CONFLICT, "Could not create Todo with the provided title");
         }
 
-        this.todoRepository.save(todo);
+        return this.todoRepository.save(todo);
     }
 
     public Todo updateTodo(Todo todo){
