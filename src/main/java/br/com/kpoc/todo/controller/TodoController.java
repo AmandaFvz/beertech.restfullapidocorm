@@ -3,6 +3,7 @@ package br.com.kpoc.todo.controller;
 import br.com.kpoc.todo.controller.dto.TodoDto;
 import br.com.kpoc.todo.model.Todo;
 import br.com.kpoc.todo.service.TodoService;
+import java.util.ArrayList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -54,5 +55,25 @@ public class TodoController {
         } catch (HttpClientErrorException ex) {
             return new ResponseEntity<>(ex.getStatusCode());
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<ArrayList<Todo>> getAllTodos() {
+        try {
+            return ResponseEntity.ok(todoService.getAll());
+        }catch (HttpClientErrorException ex) {
+            return new ResponseEntity<>(ex.getStatusCode());
+        }
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Todo> getById(@PathVariable UUID id) {
+        try {
+            return ResponseEntity.ok(todoService.getById(id));
+        }catch (HttpClientErrorException ex){
+            return new ResponseEntity<>(ex.getStatusCode());
+        }
+
     }
 }
